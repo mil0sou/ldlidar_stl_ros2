@@ -168,32 +168,25 @@ void LogModule::LogPrintNoLocationInf(const char* format,...) {
 void LogModule::InitLock() {
 #ifndef LINUX
 	InitializeCriticalSection(&mutex_lock_);
-#else
-  pthread_mutex_init(&mutex_lock_,NULL);
+
 #endif
 }
 
 void LogModule::RealseLock() {
 #ifndef LINUX
 	DeleteCriticalSection(&mutex_lock_);
-#else
-	pthread_mutex_unlock(&mutex_lock_);
 #endif
 }
 
 void LogModule::Lock() {
 #ifndef LINUX
 	EnterCriticalSection(&mutex_lock_);
-#else
-	pthread_mutex_lock(&mutex_lock_);
 #endif
 }
 
 void LogModule::UnLock() {
 #ifndef LINUX
 	LeaveCriticalSection(&mutex_lock_);
-#else
-	pthread_mutex_unlock(&mutex_lock_);
 #endif
 }
 
